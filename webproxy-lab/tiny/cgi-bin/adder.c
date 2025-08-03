@@ -6,9 +6,12 @@
 
 int main(void)
 {
-  char *buf, *p;
+  char *buf, *p, *method_type;
   char arg1[MAXLINE], arg2[MAXLINE], content[MAXLINE];
   int n1 = 0, n2 = 0;
+
+  /* Extract the method type */
+  method_type = getenv("METHOD_TYPE");
 
   /* Extract the two arguments */
   if ((buf = getenv("QUERY_STRING")) != NULL)
@@ -22,7 +25,7 @@ int main(void)
   }
 
   /* Make the response body */
-  sprintf(content, "QUERY_STRING=%s\r\n<p>", buf);
+  sprintf(content, "QUERY_STRING=%s&%s\r\n<p>", arg1, arg2);
   sprintf(content + strlen(content), "Welcome to add.com: ");
   sprintf(content + strlen(content), "THE Internet addition portal.\r\n<p>");
   sprintf(content + strlen(content), "The answer is: %d + %d = %d\r\n<p>",
@@ -33,6 +36,12 @@ int main(void)
   printf("Content-type: text/html\r\n");
   printf("Content-length: %d\r\n", (int)strlen(content));
   printf("\r\n");
+  if (strcasecmp(method_type, "HEAD") == 0)
+  {
+    fflush(stdout);
+
+    exit(0);
+  }
   printf("%s", content);
   fflush(stdout);
 
