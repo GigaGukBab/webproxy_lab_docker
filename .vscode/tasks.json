@@ -1,0 +1,103 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Tiny server build",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/webproxy-lab/tiny && make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/webproxy-lab/tiny"
+            }
+        },
+        {
+            "label": "Tiny server clean",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/webproxy-lab/tiny && make clean",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}/webproxy-lab/tiny"
+            }
+        },
+        {
+            "label": "Tiny server clean-and-build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Tiny server clean",
+                "Tiny server build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Proxy server build",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/webproxy-lab && make",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/webproxy-lab"
+            }
+        },
+        {
+            "label": "Proxy server clean",
+            "type": "shell",
+            "command": "cd ${workspaceFolder}/webproxy-lab && make clean",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": [],
+            "options": {
+                "cwd": "${workspaceFolder}/webproxy-lab"
+            }
+        },
+        {
+            "label": "Proxy server clean-and-build",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Proxy server clean",
+                "Proxy server build"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            },
+            "problemMatcher": []
+        }
+    ]
+}
